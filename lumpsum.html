@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lumpsum Calculator - Finpulz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .result {
+      background: #e9f7ef;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Lumpsum Investment Calculator</h2>
+
+    <label for="investment">Invested Amount (₹)</label>
+    <input type="number" id="investment" placeholder="e.g. 5000000">
+
+    <label for="rate">Expected Annual Return (%)</label>
+    <input type="number" id="rate" placeholder="e.g. 10">
+
+    <label for="time">Time Period (Years)</label>
+    <input type="number" id="time" placeholder="e.g. 10">
+
+    <button onclick="calculateLumpsum()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateLumpsum() {
+      const P = parseFloat(document.getElementById("investment").value);
+      const R = parseFloat(document.getElementById("rate").value) / 100;
+      const T = parseFloat(document.getElementById("time").value);
+
+      if (isNaN(P) || isNaN(R) || isNaN(T) || P <= 0 || R <= 0 || T <= 0) {
+        document.getElementById("result").innerText = "Please enter valid values.";
+        return;
+      }
+
+      const totalValue = P * Math.pow(1 + R, T);
+      const estimatedReturn = totalValue - P;
+
+      document.getElementById("result").innerHTML = `
+        Invested Amount: ₹${P.toLocaleString(undefined, { maximumFractionDigits: 0 })}<br>
+        Estimated Return: ₹${estimatedReturn.toLocaleString(undefined, { maximumFractionDigits: 0 })}<br>
+        Total Value: ₹${totalValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+      `;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EMI Calculator - Finpulz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 25px;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #e9f5ff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>EMI Calculator</h2>
+    <label for="loanAmount">Loan Amount (₹)</label>
+    <input type="number" id="loanAmount" placeholder="Enter loan amount" />
+
+    <label for="interestRate">Annual Interest Rate (%)</label>
+    <input type="number" id="interestRate" placeholder="e.g. 10" step="0.01"/>
+
+    <label for="tenure">Tenure (in months)</label>
+    <input type="number" id="tenure" placeholder="e.g. 60"/>
+
+    <button onclick="calculateEMI()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateEMI() {
+      const P = parseFloat(document.getElementById("loanAmount").value);
+      const annualRate = parseFloat(document.getElementById("interestRate").value);
+      const N = parseInt(document.getElementById("tenure").value);
+
+      if (isNaN(P) || isNaN(annualRate) || isNaN(N)) {
+        document.getElementById("result").innerHTML = "Please fill all fields correctly.";
+        return;
+      }
+
+      const r = annualRate / 12 / 100;
+
+      const emi = (P * r * Math.pow(1 + r, N)) / (Math.pow(1 + r, N) - 1);
+      const totalPayment = emi * N;
+      const totalInterest = totalPayment - P;
+
+      document.getElementById("result").innerHTML = `
+        Monthly EMI: ₹${emi.toFixed(2)}<br/>
+        Total Payment: ₹${totalPayment.toFixed(2)}<br/>
+        Total Interest: ₹${totalInterest.toFixed(2)}
+      `;
+    }
+  </script>
+</body>
+</html>

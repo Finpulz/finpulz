@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CAGR Calculator - Finpulz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 25px;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #e9f5ff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>CAGR Calculator</h2>
+
+    <label for="initial">Initial Investment (₹)</label>
+    <input type="number" id="initial" required placeholder="Enter initial value" />
+
+    <label for="final">Final Value (₹)</label>
+    <input type="number" id="final" required placeholder="Enter final value" />
+
+    <label for="years">Investment Duration (in years)</label>
+    <input type="number" id="years" required placeholder="e.g. 5" />
+
+    <button type="button"
+      onclick="calculateCAGR()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateCAGR() {
+      const initial = parseFloat(document.getElementById("initial").value);
+      const final = parseFloat(document.getElementById("final").value);
+      const years = parseFloat(document.getElementById("years").value);
+
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(initial) || isNaN(final) || isNaN(years) || initial <= 0 || final <= 0 || years <= 0) {
+        resultDiv.innerHTML = "Please enter valid values for all fields.";
+        return;
+      }
+
+      const cagr = (Math.pow(final / initial, 1 / years) - 1) * 100;
+      resultDiv.innerHTML = `CAGR: ${cagr.toFixed(2)}%`;
+    }
+  </script>
+</body>
+</html>

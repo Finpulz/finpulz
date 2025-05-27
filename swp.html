@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SWP Calculator - Finpulz</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .swp-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      color: #000;
+    }
+    .swp-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .result {
+      margin-top: 25px;
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="logofin.jpg" alt="Finpulz Logo" class="logo-img" />
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="tracker.html">Tracker</a></li>
+      <li><a href="fin101.html">Explainers</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="swp-container">
+    <h2>SWP Calculator</h2>
+    <label>Initial Investment (₹):</label>
+    <input type="number" id="initialInvestment" placeholder="Enter lump sum amount" />
+
+    <label>Monthly Withdrawal (₹):</label>
+    <input type="number" id="monthlyWithdrawal" placeholder="Enter withdrawal amount" />
+
+    <label>Expected Annual Return (%):</label>
+    <input type="number" id="annualReturn" placeholder="Enter annual return rate" />
+
+    <label>Investment Duration (Years):</label>
+    <input type="number" id="durationYears" placeholder="Enter duration in years" />
+
+    <button onclick="calculateSWP()">Calculate</button>
+
+    <div class="result" id="swpResult"></div>
+  </div>
+
+  <footer>
+    <p>Finpulz © 2025</p>
+  </footer>
+
+  <script>
+    function calculateSWP() {
+      const P = parseFloat(document.getElementById("initialInvestment").value);
+      const PMT = parseFloat(document.getElementById("monthlyWithdrawal").value);
+      const r = parseFloat(document.getElementById("annualReturn").value) / 100 / 12;
+      const t = parseFloat(document.getElementById("durationYears").value);
+      const n = t * 12;
+
+      if (isNaN(P) || isNaN(PMT) || isNaN(r) || isNaN(n)) {
+        document.getElementById("swpResult").innerHTML = "Please enter valid inputs.";
+        return;
+      }
+
+      const investedAmount = P;
+      const totalWithdrawn = PMT * n;
+
+      const compoundFactor = Math.pow(1 + r, n);
+      const finalValue = (P * compoundFactor) - (PMT * (compoundFactor - 1) / r);
+
+      document.getElementById("swpResult").innerHTML = `
+        <strong>Total Investment:</strong> ₹${investedAmount.toFixed(2)}<br>
+        <strong>Total Withdrawal:</strong> ₹${totalWithdrawn.toFixed(2)}<br>
+        <strong>Final Value:</strong> ₹${finalValue.toFixed(2)}
+      `;
+    }
+  </script>
+</body>
+</html>

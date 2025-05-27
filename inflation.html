@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inflation Calculator - Finpulz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .result {
+      background: #e9f7ef;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Inflation Impact Calculator</h2>
+
+    <label for="cost">Current Cost (₹)</label>
+    <input type="number" id="cost" placeholder="e.g. 1000">
+
+    <label for="inflation">Inflation Rate (%)</label>
+    <input type="number" id="inflation" placeholder="e.g. 6">
+
+    <label for="years">Time Period (Years)</label>
+    <input type="number" id="years" placeholder="e.g. 10">
+
+    <button onclick="calculateInflation()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateInflation() {
+      const cost = parseFloat(document.getElementById("cost").value);
+      const inflation = parseFloat(document.getElementById("inflation").value);
+      const years = parseInt(document.getElementById("years").value);
+
+      if (isNaN(cost) || isNaN(inflation) || isNaN(years) || cost <= 0 || inflation < 0 || years <= 0) {
+        document.getElementById("result").innerText = "Please enter valid values.";
+        return;
+      }
+
+      const futureCost = cost * Math.pow(1 + inflation / 100, years);
+      const increase = futureCost - cost;
+
+      document.getElementById("result").innerHTML = `
+        Current Cost: ₹${cost.toFixed(2).toLocaleString()}<br>
+        Cost Increase Due to Inflation: ₹${increase.toFixed(2).toLocaleString()}<br>
+        Future Cost After ${years} Years: ₹${futureCost.toFixed(2).toLocaleString()}
+      `;
+    }
+  </script>
+</body>
+</html>

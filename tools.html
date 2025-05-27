@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finpulz - Tools</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .tools-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+    .tool-card {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    .tool-card:hover {
+      transform: scale(1.03);
+    }
+    .tool-card h3 {
+      margin-bottom: 10px;
+    }
+    .tool-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    .tool-card a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="logofin.jpg" alt="Finpulz Logo" class="logo-img" />
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="tools.html" class="active">Tools</a></li>
+      <li><a href="tracker.html">Tracker</a></li>
+      <li><a href="fin101.html">Explainers</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <button id="theme-toggle">Dark Mode</button>
+  </nav>
+
+  <h2 style="text-align:center; margin-top:20px;">Financial Tools & Calculators</h2>
+
+  <section class="tools-container">
+    <div class="tool-card">
+      <h3>SIP Calculator</h3>
+      <p>Estimate returns on monthly SIP investments over time.</p>
+      <a href="sip.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>SWP Calculator</h3>
+      <p>Plan your Systematic Withdrawal strategy smartly.</p>
+      <a href="swp.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>FD Returns Checker</h3>
+      <p>Calculate maturity amount of fixed deposits.</p>
+      <a href="fd.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>Retirement Calculator</h3>
+      <p>Plan retirement based on your lifestyle and spending.</p>
+      <a href="retirement.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>EMI Calculator</h3>
+      <p>Compute your monthly loan payments easily.</p>
+      <a href="emi.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>Simple Interest</h3>
+      <p>Quickly calculate simple interest earned on capital.</p>
+      <a href="simple-interest.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>Compound Interest</h3>
+      <p>Estimate wealth growth with compounding effect.</p>
+      <a href="compound-interest.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>CAGR Calculator</h3>
+      <p>Calculate annual growth rate of investments.</p>
+      <a href="cagr.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>Inflation Adjusted Price</h3>
+      <p>Find real value of money over time considering inflation.</p>
+      <a href="inflation.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>Currency Converter</h3>
+      <p>Convert values between international currencies.</p>
+      <a href="currency.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>Lumpsum Investment</h3>
+      <p>Calculate expected returns on one-time investments.</p>
+      <a href="lumpsum.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>Net Worth Calculator</h3>
+      <p>Evaluate your total assets minus liabilities.</p>
+      <a href="networth.html">Open</a>
+    </div>
+    <div class="tool-card">
+      <h3>Recurring Deposit</h3>
+      <p>Compute maturity amount of your RD investments.</p>
+      <a href="rd.html">Open</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Finpulz © 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

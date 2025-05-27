@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RD Calculator - Finpulz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .result {
+      background: #e9f7ef;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Recurring Deposit Calculator</h2>
+    <label for="monthly">Monthly Investment (₹)</label>
+    <input type="number" id="monthly" placeholder="e.g. 5000" />
+
+    <label for="duration">Duration (in months)</label>
+    <input type="number" id="duration" placeholder="e.g. 36" />
+
+    <label for="rate">Annual Interest Rate (%)</label>
+    <input type="number" id="rate" placeholder="e.g. 7" />
+
+    <button onclick="calculateRD()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateRD() {
+      const monthly = parseFloat(document.getElementById("monthly").value);
+      const months = parseInt(document.getElementById("duration").value);
+      const annualRate = parseFloat(document.getElementById("rate").value);
+
+      if (isNaN(monthly) || isNaN(months) || isNaN(annualRate) || monthly <= 0 || months <= 0 || annualRate <= 0) {
+        document.getElementById("result").innerText = "Please enter valid values.";
+        return;
+      }
+
+      const r = annualRate / 400; // Quarterly interest rate
+      let maturity = 0;
+
+      for (let i = 0; i < months; i++) {
+        const quartersLeft = Math.floor((months - i) / 3);
+        maturity += monthly * Math.pow(1 + r, quartersLeft);
+      }
+
+      const totalInvestment = monthly * months;
+      const interestEarned = maturity - totalInvestment;
+
+      document.getElementById("result").innerHTML = `
+        Total Investment: ₹${totalInvestment.toFixed(0).toLocaleString()}<br>
+        Maturity Amount: ₹${maturity.toFixed(0).toLocaleString()}<br>
+        Interest Earned: ₹${interestEarned.toFixed(0).toLocaleString()}
+      `;
+    }
+  </script>
+</body>
+</html>
