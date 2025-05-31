@@ -75,5 +75,31 @@
     nav.classList.toggle("active");
   }
 </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQeOV4TAU.../pub?output=csv'; // Replace with your actual News Sheet CSV URL
+
+    fetch(sheetURL)
+      .then(response => response.text())
+      .then(data => {
+        const rows = data.trim().split('\n').slice(1); // Skip header
+        const latestNewsDiv = document.getElementById("latest-news");
+        latestNewsDiv.innerHTML = ''; // Clear previous content
+
+        rows.slice(0, 3).forEach(row => {
+          const [date, headline, summary, link] = row.split(',');
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <h3>${headline}</h3>
+            <p>${summary}</p>
+            <a href="${link}" target="_blank">Read More</a>
+          `;
+          latestNewsDiv.appendChild(card);
+        });
+      });
+  });
+</script>
 </body>
 </html>
