@@ -11,7 +11,9 @@
     <div class="logo">
       <img src="logofin.jpg" alt="Finpulz Logo" class="logo-img" />
     </div>
-    <ul class="nav-links">
+
+    <div class="hamburger" onclick="toggleMenu()"> &#9776; </div>
+      <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="news.html">News</a></li>
       <li><a href="tools.html">Tools</a></li>
@@ -34,5 +36,11 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+  function toggleMenu() {
+    const nav = document.getElementById("navLinks");
+    nav.classList.toggle("active");
+  }
+</script>
 </body>
 </html>
