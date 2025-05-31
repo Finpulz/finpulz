@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentPage = window.location.pathname;
 
   // --- Load News (index.html and news.html) ---
-  if (currentPage.includes("index.html") || currentPage.includes("news.html") || currentPage === "/") {
+  if (currentPage.endsWith("/") || currentPage.endsWith("index.html") || currentPage.includes("news.html")) {
     const newsURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhqLVaG4H4nW0xC-OZYKHFPDTp62onC4HJRiWV-gfPWm2dWfw4KKMLp6RkihEeSWPMZpT54Q1kv09J/pub?output=csv';
 
     fetch(newsURL)
